@@ -1,5 +1,9 @@
 # Docker example
 
+This page contains examples of docker commands. 
+
+## Lanuch a new ubuntu docker container. 
+
 Launch a new docker container with a ubuntu image.
 
 ```
@@ -15,7 +19,12 @@ docker run -i -t --rm ubuntu /bin/bash
 
 Start a redis docker container.
 ```
- docker run -d -P --name redis redis
+docker run -d -P --name redis redis
+```
+
+Check the port of the redis container.
+```
+docker port redis
 ```
 
 Create a  Dockerfile:
@@ -54,3 +63,9 @@ Lanunch a nodejs container
 ```
 docker run --link redis minsikl/nodejs_example
 ```
+
+## Start a redis process with a restart option. 
+```
+docker run -d -P --restart unless-stopped --name redis redis
+```
+
