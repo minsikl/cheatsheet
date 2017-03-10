@@ -1,4 +1,4 @@
-# Docker example
+# Docker examples
 
 This page contains examples of docker commands. 
 
@@ -69,8 +69,46 @@ docker run --link redis minsikl/nodejs_example
 docker run -d -P --restart unless-stopped --name redis redis
 ```
 
-## Use datavolume
+## Use data volume
 ```
 docker create -v /usr/local/var/lib/couchdb --name db-data alpine /bin/true
 docker run -d -p 5984:5984 -v /usr/local/var/lib/couchdb --name db1 --volumes-from db-data couchdb
+```
+# Docker-compose examples
+Create a `docker-compose.yml` file
+```
+version: "3"
+services:
+  redis1:
+   image: redis
+```
+
+Lanuch, stop, delete a docker container.
+```
+docker-compose up -d
+docker-compose ps
+docker-compose stop
+docker-compose rm
+```
+
+# Splunk log configuration
+Configure a splunk container.
+```
+docker run -d -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_USER=root" -p "8000:8000" -p "8088:8088" splunk/splunk
+docker run --name redis --log-driver=splunk --log-opt splunk-token=[TOKEN] --log-opt splunk-url=http://127.0.0.1:8088 -d redis
+
+```
+
+docker-compose.yml for splunk
+```
+version: "3"
+services:
+  splunk1:
+   image: splunk/splunk
+   ports:
+    - "8000:8000"
+    - "8088:8088"
+   environment:
+    - SPLUNK_START_ARGS=--accept-license
+    - SPLUNK_USER=root
 ```
