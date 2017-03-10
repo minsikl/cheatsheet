@@ -69,3 +69,8 @@ docker run --link redis minsikl/nodejs_example
 docker run -d -P --restart unless-stopped --name redis redis
 ```
 
+## Use datavolume
+```
+docker create -v /usr/local/var/lib/couchdb --name db-data alpine /bin/true
+docker run -d -p 5984:5984 -v /usr/local/var/lib/couchdb --name db1 --volumes-from db-data couchdb
+```
