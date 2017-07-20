@@ -15,8 +15,7 @@
 }
 ```
 
-
-#Plugins for node
+# Plugins for node
 ESLint
 JavaScript (ES6) code snippets
 Node Version
