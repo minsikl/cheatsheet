@@ -16,9 +16,9 @@
 ```
 
 # Plugins for node
-ESLint
-JavaScript (ES6) code snippets
-Node Version
-npm Intellisense
-Path Intellisense
-Prettier
+- ESLint
+- JavaScript (ES6) code snippets
+- Node Version
+- npm Intellisense
+- Path Intellisense
+- Prettier
