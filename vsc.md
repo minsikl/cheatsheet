@@ -1,5 +1,5 @@
 # settings.json for node
-```ja
+```javascript
 {
     "npm-intellisense.scanDevDependencies": true,
     "npm-intellisense.packageSubfoldersIntellisense": true,
@@ -14,3 +14,11 @@
     "editor.formatOnSave": true
 }
 ```
+
+#Plugins for node
+ESLint
+JavaScript (ES6) code snippets
+Node Version
+npm Intellisense
+Path Intellisense
+Prettier
