@@ -1,5 +1,6 @@
 # settings.json for node
 ```javascript
+// Place your settings in this file to overwrite the default settings
 {
     "npm-intellisense.scanDevDependencies": true,
     "npm-intellisense.packageSubfoldersIntellisense": true,
@@ -8,7 +9,9 @@
     "path-intellisense.autoSlashAfterDirectory": true,
     "eslint.options": {
         "rules": {
-            "indent": 0
+            "indent": 0,
+            "quotes": 0,
+            "no-console": "warn"
         }
     },
     "editor.formatOnSave": true
