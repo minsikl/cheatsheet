@@ -6,7 +6,6 @@ import json
 
 source_dir = '/incoming_images'
 license_plate_dir = '/license_plates'
-int i = 0
 
 
 def handle_message():
@@ -16,19 +15,19 @@ def handle_message():
             print("No available image. Sleep 3 secs...")
             time.sleep(3)
         else:
-            i = i + 1
-            print(incoming_images[i])
+            print(incoming_images[0])
             p = subprocess.Popen("/usr/bin/alpr -c us -n 1 -j " + source_dir +
                                  "/" + incoming_images[0], stdout=subprocess.PIPE, shell=True)
-            (alpr_output_str, err) = p.communicate()
+            (alpr_output_bytes, err) = p.communicate()
             p_status = p.wait()
-            alpr_output = json.load(alpr_output_str)
+            alpr_output_str = alpr_output_bytes.decode("utf-8")
+            print(alpr_output_str)
+            alpr_output = json.loads(alpr_output_str)
             if len(alpr_output['results']) > 0:
-                print(alpr_output['results'][0]["plate"])
-                # p = subprocess.Popen("cp " + source_dir + "/" + incoming_images[0] + " " + license_plate_dir + "/" + license_plate_number)
-                # time.sleep(2)
-                # print("DELETE FILE : " + incoming_images[0])
-                # os.unlink(incoming_images[0])
+                license_plate_number = alpr_output['results'][0]["plate"]
+                p = subprocess.Popen("/bin/cp " + source_dir + "/" + incoming_images[0] + " " + license_plate_dir + "/" + license_plate_number + "_" + incoming_images[0], stdout=subprocess.PIPE, shell=True)
+                p_status = p.wait()
+            os.unlink(source_dir + "/" + incoming_images[0])
 
 
 def create_daemon():
@@ -50,8 +49,9 @@ def create_daemon():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s %(levelname)s %(message)s',
-                        filename='licenseplate_monitor.log',
-                        filemode='w')
-    create_daemon()
+#    logging.basicConfig(level=logging.DEBUG,
+#                        format='%(asctime)s %(levelname)s %(message)s',
+#                        filename='licenseplate_monitor.log',
+#                        filemode='w')
+    handle_message()
+    # create_daemon()
