@@ -1,5 +1,5 @@
 variable cmd {
-  default   = "echo"
+  default   = ""
 }
 resource "null_resource" "example1" {
   provisioner "local-exec" {
